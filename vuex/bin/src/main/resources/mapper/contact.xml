@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+ 
+<mapper namespace="com.uracle.future.mapper.ContactDao">
+ 
+    <select id="getContact" parameterType="com.uracle.future.vo.Contact" resultType="com.uracle.future.vo.Contact">
+        select
+        	no, name, tell, address
+        from
+        	contact
+        <if test="name != null and name != ''">
+        	where
+        		name like concat('%',#{name},'%')
+        </if>
+       
+    </select>
+ 
+</mapper>

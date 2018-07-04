@@ -1,7 +1,7 @@
 <template>
   <div>
     <p>
-      <input type="text" name="user_name" class="form-control" v-model.trim="name" placeholder="이름 : 세글자 이상 입력 후 엔터!" @keyup.enter="keyupEvent" />
+      이름 : <input type="text" v-model.trim="name" placeholder="두글자 이상 입력 후 엔터!" @keyup.enter="keyupEvent" />
     </p>
   </div>
 </template>
@@ -17,7 +17,6 @@ export default {
   methods : {
     keyupEvent : function(e) {
       var val = e.target.value;
-      alert($("input[name=user_name").val());
       if (val.length >= 2) {
         this.$store.dispatch(Constant.SEARCH_CONTACT, {name : val })
         this.name = "";
@@ -30,7 +29,7 @@ export default {
 </script>
 
 <style>
-/*#list {
+#list {
   width : 600px;
   border : 1px solid black;
   border-collapse : collapse;
@@ -44,5 +43,5 @@ export default {
 #list > thead > tr {
   color : yellow;
   background-color : purple;
-}*/
+}
 </style>
