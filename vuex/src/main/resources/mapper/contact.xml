@@ -17,4 +17,12 @@
  	<select id="checkLogin" parameterType="com.uracle.future.vo.User" resultType="com.uracle.future.vo.User">
  		select * from user where id = #{id} and pwd = #{pwd}
  	</select>
+ 	
+ 	<insert id="testUserInsert">
+ 		insert into user (id, name, pwd) values ('1111', 'one', '1111')
+ 	</insert>
+ 	
+ 	<insert id="testContactInsert">
+ 		insert into contact (name, tell, address) values ('one', '010-1111-1122', '서울시 강동구 명일동 롯데캐슬 105동 506호')
+ 	</insert>
 </mapper>

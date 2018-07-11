@@ -7,4 +7,6 @@ import com.uracle.future.vo.User;
 public interface ContactDao {
 	public List<Contact> getContact(Contact contact) throws Exception;
 	public List<User> checkLogin(User user) throws Exception;
+	public Integer testUserInsert() throws Exception;
+	public Integer testContactInsert() throws Exception;
 }
