@@ -1,11 +1,13 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import Constant from '../constant';
-import SearchApi from '../api/SearchAPI';
+//import Constant from '../constant';
+//import SearchApi from '../api/SearchAPI';
+import contact from './modules/contact';
+import auth from './modules/auth';
 
 Vue.use(Vuex);
 
-const store = new Vuex.Store({
+/*const store = new Vuex.Store({
 	state : {
 		contacts : []
 	},
@@ -24,4 +26,26 @@ const store = new Vuex.Store({
 	}
 })
 
-export default store;
+export default store;*/
+export default new Vuex.Store({
+  modules: {
+    contact,
+    auth
+  },
+
+  state: { // = data
+
+  },
+
+  getters: { // = computed properties
+
+  },
+
+  actions: { // = computed properties
+
+  },
+
+  mutations: {
+
+  }
+})

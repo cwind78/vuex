@@ -26,7 +26,10 @@ import { mapState } from 'vuex';
 
 export default {
   name: 'contact-list',
-  computed : mapState([ 'contacts' ])
+  //computed : mapState([ 'contacts' ])
+  computed: {
+    ...mapState({contacts: state => state.contact.contacts})
+  }
 }
 </script>
 

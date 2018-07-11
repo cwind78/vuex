@@ -3,7 +3,7 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-import store from './store'
+import store from '@/store/index'
 import ES6Promise from 'es6-promise'
 import 'bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
@@ -13,8 +13,8 @@ Vue.config.productionTip = false
 
 /* eslint-disable no-new */
 new Vue({
-  store,
   el: '#app',
+  store,
   router,
   components: { App },
   template: '<App/>'

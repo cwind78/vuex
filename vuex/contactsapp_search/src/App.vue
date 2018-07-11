@@ -1,17 +1,16 @@
 <template>
   <div>
-    <search placeholder="두 글자 이상 입력 후 엔터!"></search>
-    <contact-list></contact-list>
+    <menus></menus>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import Search from './components/Search.vue';
-import ContactList from './components/ContactList.vue';
+import Menus from './components/Menus.vue'
 
 export default {
   name: 'App',
-  components : {Search, ContactList}
+  components: {Menus}
 }
 </script>
 

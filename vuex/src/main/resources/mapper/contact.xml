@@ -2,7 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
  
 <mapper namespace="com.uracle.future.mapper.ContactDao">
- 
     <select id="getContact" parameterType="com.uracle.future.vo.Contact" resultType="com.uracle.future.vo.Contact">
         select
         	no, name, tell, address
@@ -14,5 +13,8 @@
         </if>
        
     </select>
- 
+ 	
+ 	<select id="checkLogin" parameterType="com.uracle.future.vo.User" resultType="com.uracle.future.vo.User">
+ 		select * from user where id = #{id} and pwd = #{pwd}
+ 	</select>
 </mapper>

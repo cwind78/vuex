@@ -1,20 +1,22 @@
 <template>
   <div>
     <p>
-      <input type="text" name="user_name" class="form-control" v-model.trim="name" placeholder="이름 : 세글자 이상 입력 후 엔터!" @keyup.enter="keyupEvent" />
+      <!--input type="text" name="user_name" class="form-control" v-model.trim="name" placeholder="이름 : 세글자 이상 입력 후 엔터!" @keyup.enter="keyupEvent" /-->
+      <input type="text" name="user_name" class="form-control" v-model.trim="user_name" placeholder="이름 : 세글자 이상 입력 후 엔터!" @keyup.enter="searchContact" />
     </p>
   </div>
 </template>
 
 <script>
-import Constant from '../constant';
+//import Constant from '../../constant';
+//import mapActions from 'vuex'
 
 export default {
   name: 'search',
   data : function() {
-    return { name : "" }
+    return { user_name : "" }
   },
-  methods : {
+  /*methods : {
     keyupEvent : function(e) {
       var val = e.target.value;
       alert($("input[name=user_name").val());
@@ -24,6 +26,12 @@ export default {
       } else {
         this.$store.dispatch(Constant.SEARCH_CONTACT, {name : ''})
       }
+    }
+  }*/
+  methods: {
+    //...mapActions('contact', ['searchContact'])
+    searchContact : function() {
+      this.$store.dispatch('contact/searchContact', {name : this.user_name})
     }
   }
 }
