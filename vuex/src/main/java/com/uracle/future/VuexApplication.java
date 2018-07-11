@@ -26,6 +26,8 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 @EnableTransactionManagement
 @MapperScan(value = {"com.uracle.future.mapper"})
 public class VuexApplication {
+	@Autowired
+	DataSource dataSource;
 
 	public static void main(String[] args) {
 		SpringApplication.run(VuexApplication.class, args);
@@ -50,9 +52,9 @@ public class VuexApplication {
     }
 	
 	@Bean
-	@Autowired
-	public DataSourceTransactionManager txManager(DataSource dataSource) throws Exception {
-		System.out.println(dataSource);
-		return new DataSourceTransactionManager(dataSource);
+	//@Autowired
+	public DataSourceTransactionManager transactionManager() throws Exception {
+		//System.out.println(dataSource);
+		return new DataSourceTransactionManager(this.dataSource);
 	}
 }
