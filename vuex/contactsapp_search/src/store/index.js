@@ -34,7 +34,7 @@ export default new Vuex.Store({
   },
 
   state: { // = data
-
+    isloading: false
   },
 
   getters: { // = computed properties
@@ -42,10 +42,14 @@ export default new Vuex.Store({
   },
 
   actions: { // = computed properties
-
+    /*changeLoading: (store, payload) => {
+    	store.commit(changeLoading, payload)
+    }*/
   },
 
   mutations: {
-
+    changeLoading: (state, payload) => {
+    	state.isloading = payload.isloading
+    }
   }
 })

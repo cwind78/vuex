@@ -7,9 +7,12 @@ import store from '@/store/index'
 import ES6Promise from 'es6-promise'
 import 'bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
+import VueAWN from "vue-awesome-notifications"
+
 
 ES6Promise.polyfill();
 Vue.config.productionTip = false
+Vue.use(VueAWN, {position:"top"})
 
 /* eslint-disable no-new */
 new Vue({

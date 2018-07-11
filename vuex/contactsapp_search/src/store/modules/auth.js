@@ -16,9 +16,11 @@ export default {
   },
   actions : {
     updateAuth (store, payload)  {
+      store.commit("changeLoading", {isloading: true}, {root: true})
       axios.get(Constant.BASE_URL + "auth/"+payload.id+"/"+payload.pwd)
         .then((response) => {
           store.commit("updateAuth", { auth : response.data })
+          store.commit("changeLoading", {isloading: false}, {root: true})
           router.push({name: "HelloWorld"})
         })
     },

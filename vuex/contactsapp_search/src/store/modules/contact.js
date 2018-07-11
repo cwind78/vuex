@@ -16,9 +16,11 @@ export default {
 	},
 	actions : {
 		searchContact (store, payload)  {
+			store.commit("changeLoading", {isloading:true}, {root: true})
 			SearchApi.searchContact(payload.name)
 				.then((response) => {
 					store.commit("searchContact", { contacts : response.data })
+					store.commit("changeLoading", {isloading:false}, {root: true})
 				})
 		}
 	}

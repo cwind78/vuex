@@ -2,19 +2,27 @@
   <div>
     <menus></menus>
     <router-view></router-view>
+    <loading v-show="isloading"></loading>
   </div>
 </template>
 
 <script>
 import Menus from './components/Menus.vue'
+import Loading from './components/Loading.vue'
+import { mapState } from "vuex"
 
 export default {
   name: 'App',
-  components: {Menus}
+  components: {Menus, Loading},
+  computed: {
+    ...mapState(["isloading"])
+  }
 }
 </script>
 
 <style>
+@import 'vue-awesome-notifications/dist/styles/style.css';
+
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
