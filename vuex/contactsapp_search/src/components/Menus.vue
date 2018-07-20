@@ -1,10 +1,10 @@
 <template>
-  <div>
+  <div v-if="!getAuth" >
     <h3>Menu</h3>
-    <a v-if="!getAuth" @click="logout">Logout</a>
-    <router-link v-else :to="{name : 'Login'}">Login</router-link>
-    <router-link v-if="!getAuth" :to="{name : 'HelloWorld'}">Home</router-link>
-    <router-link v-if="!getAuth" :to="{name : 'Contact'}">Contact</router-link>
+    <a @click="logout">Logout</a>
+    <!--router-link v-else :to="{name : 'Login'}">Login</router-link-->
+    <router-link :to="{name : 'HelloWorld'}">Home</router-link>
+    <router-link :to="{name : 'Contact'}">Contact</router-link>
   </div>
 </template>
 

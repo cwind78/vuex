@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.uracle.future.mapper.ContactDao;
 import com.uracle.future.service.ContactService;
@@ -51,6 +53,29 @@ public class ContactCtrl {
 			System.out.println("name="+session.getAttribute("NAME").toString());
 		}
 		
+		return list; 
+	}
+	
+	@PostMapping("/user/signup")
+    @ResponseBody
+	public List<User> signUp(@RequestBody User user,
+			HttpServletRequest request) throws Exception {
+		Integer insert_count = contactDao.signUp(user);
+		List<User> list = new ArrayList<User>();
+		list.add(insert_count>0?user:null);
+		return list; 
+	}
+	
+	@GetMapping("/user/checkid/{id}")
+    @ResponseBody
+	public List<User> checkDupleID(@PathVariable("id") String id,
+			HttpServletRequest request) throws Exception {
+		User user = new User();
+		user.setId(id);
+		Integer count = contactDao.checkDupleID(user);
+		List<User> list = new ArrayList<User>();
+		System.out.println("count="+count);
+		list.add(count>0?user:null);
 		return list; 
 	}
 	

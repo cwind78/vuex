@@ -3,6 +3,7 @@
     <menus></menus>
     <router-view></router-view>
     <loading v-show="isloading"></loading>
+    <notifications group="common" />
   </div>
 </template>
 
@@ -21,7 +22,7 @@ export default {
 </script>
 
 <style>
-@import 'vue-awesome-notifications/dist/styles/style.css';
+/*@import 'vue-awesome-notifications/dist/styles/style.css';*/
 
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
@@ -30,5 +31,8 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+.error {
+  color:red;
 }
 </style>

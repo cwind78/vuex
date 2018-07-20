@@ -32,7 +32,8 @@ export default {
     //...mapActions('contact', ['searchContact'])
     searchContact : function() {
       if (this.user_name.length < 3) {
-        this.$awn.info("Please input more than 3 letters")
+        //this.$awn.info("Please input more than 3 letters")
+        this.$noti_warn('Please input more than 3 letters');
         return false;
       }
       this.$store.dispatch('contact/searchContact', {name : this.user_name})

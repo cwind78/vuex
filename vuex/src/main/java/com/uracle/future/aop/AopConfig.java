@@ -20,7 +20,7 @@ public class AopConfig {
 		HttpSession session = null;
 		MethodSignature signature = (MethodSignature)jp.getSignature();
 		String method = signature.getMethod().getName();
-		String[] exceptMethodArray = {"checkLogin", "test"};
+		String[] exceptMethodArray = {"checkLogin", "test", "signUp", "checkDupleID"};
 		
 		System.out.println("method="+method);
 		System.out.println("indedOf="+Arrays.asList(exceptMethodArray).indexOf(method));

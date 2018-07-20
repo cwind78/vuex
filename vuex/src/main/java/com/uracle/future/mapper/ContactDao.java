@@ -9,4 +9,7 @@ public interface ContactDao {
 	public List<User> checkLogin(User user) throws Exception;
 	public Integer testUserInsert() throws Exception;
 	public Integer testContactInsert() throws Exception;
+	public Integer signUp(User user) throws Exception;
+	public Integer checkDupleID(User user) throws Exception;
+	
 }

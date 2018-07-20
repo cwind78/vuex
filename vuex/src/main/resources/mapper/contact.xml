@@ -25,4 +25,12 @@
  	<insert id="testContactInsert">
  		insert into contact (name, tell, address) values ('one', '010-1111-1122', '서울시 강동구 명일동 롯데캐슬 105동 506호')
  	</insert>
+ 	
+ 	<insert id="signUp" parameterType="com.uracle.future.vo.User">
+ 		insert into user (id, pwd, name) values (#{id}, #{pwd}, #{name})
+ 	</insert>
+ 	
+ 	<select id="checkDupleID" parameterType="com.uracle.future.vo.User" resultType="java.lang.Integer">
+ 		select count(*) from user where id = #{id}
+ 	</select>
 </mapper>
