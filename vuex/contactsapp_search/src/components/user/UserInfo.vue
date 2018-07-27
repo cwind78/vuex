@@ -9,8 +9,12 @@
           <div class="card-body">
             <div>
               <label>ID</label>
-              <input type="text" v-model.trim="user.id" class="form-control" name="id" v-validate="'required|alpha_num|min:4'" :class="{ error: errors.has('id') }" :disabled="isID" />
-              <button class="btn btn-primary btn-sm" @click="checkID">Check ID</button>
+              <div class="input-group">
+                <input type="text" v-model.trim="user.id" class="form-control" name="id" v-validate="'required|alpha_num|min:4'" :class="{ error: errors.has('id') }" :disabled="isID" />
+                <span class="input-group-btn">
+                  <button class="btn btn-primary" @click="checkID">Check ID</button>
+                </span>
+              </div>
               <span class="error">{{ errors.first('id') }}</span>
             </div>
             <div>

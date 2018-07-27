@@ -34,7 +34,8 @@ export default new Vuex.Store({
   },
 
   state: { // = data
-    isloading: false
+    isloading: false,
+    isMenu: false,
   },
 
   getters: { // = computed properties
@@ -50,6 +51,9 @@ export default new Vuex.Store({
   mutations: {
     changeLoading: (state, payload) => {
     	state.isloading = payload.isloading
+    },
+    changeMenu: (state, payload) => {
+      state.isMenu = payload.isMenu
     }
   }
 })

@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import axios from 'axios'
 import Router from 'vue-router'
 import store from '../store'
 import Login from '@/components/Login'
@@ -25,11 +26,11 @@ export default new Router({
       name: 'Login',
       component: Login
     },
-    {
+    /*{
       path: '/contact',
       name: 'Contact',
       component: Contact
-    },
+    },*/
     {
       path: '/',
       name: 'HelloWorld',

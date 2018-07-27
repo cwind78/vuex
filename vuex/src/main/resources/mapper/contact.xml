@@ -33,4 +33,18 @@
  	<select id="checkDupleID" parameterType="com.uracle.future.vo.User" resultType="java.lang.Integer">
  		select count(*) from user where id = #{id}
  	</select>
+ 	
+ 	<select id="getMenuList" parameterType="com.uracle.future.vo.User" resultType="com.uracle.future.vo.Menu">
+ 		select menu_id, par_menu_id, deep, sort, menu_group, menu_name, url, use_yn, path from menu
+ 		where use_yn = 'Y'
+ 		order by menu_group, sort
+ 	</select>
+ 	
+ 	<select id="getUserList" parameterType="com.uracle.future.vo.User" resultType="com.uracle.future.vo.User">
+ 		select id, name, pwd from user
+ 		where 1 = 1
+ 		<if test="name != null and name != ''">
+ 			and name like concat('%',#{name},'%')
+ 		</if>
+ 	</select>
 </mapper>

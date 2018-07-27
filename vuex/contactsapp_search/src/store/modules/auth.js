@@ -8,6 +8,7 @@ export default {
   state: {
     auth: [],
     user: {},
+    users: [],
     isPop: false,
     isID: false
   },
@@ -19,6 +20,9 @@ export default {
     },
     updateUser (state, payload) {
       state.user = payload.user;
+    },
+    updateUsers (state, payload) {
+      state.users = payload;
     },
     updateIsPop (state, payload) {
       state.isPop = payload.isPop;
@@ -87,6 +91,23 @@ export default {
         .catch(function (error) {
           store.commit("changeLoading", {isloading: false}, {root: true})
           Vue.prototype.noti_warn("Please notify me this error : "+error.response)
+        })
+    },
+    getUserList (store, payload) {
+      store.commit("changeLoading", {isloading: true}, {root: true})
+      axios.get(Constant.BASE_URL + "user", {params: {name: payload.name}})
+        .then((response) => {
+          console.log(response.data);
+          if (response.data[0] == null) {
+            Vue.prototype.$noti_warn('Data is not exist')
+          } else {
+            store.commit("updateUsers", response.data)
+          }
+          store.commit("changeLoading", {isloading: false}, {root: true})
+        })
+        .catch(function (error) {
+          store.commit("changeLoading", {isloading: false}, {root: true})
+          console.log("Please notify me this error : "+error.response)
         })
     }
   }

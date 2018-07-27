@@ -10,10 +10,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.uracle.future.mapper.ContactDao;
 import com.uracle.future.service.ContactService;
 import com.uracle.future.vo.Contact;
+import com.uracle.future.vo.Menu;
 import com.uracle.future.vo.Result;
 import com.uracle.future.vo.User;
 
@@ -49,8 +51,6 @@ public class ContactCtrl {
 			session.setAttribute("ID", list.get(0).getId());
 			session.setAttribute("NAME", list.get(0).getName());
 			session.setMaxInactiveInterval(60*120);
-			
-			System.out.println("name="+session.getAttribute("NAME").toString());
 		}
 		
 		return list; 
@@ -74,8 +74,29 @@ public class ContactCtrl {
 		user.setId(id);
 		Integer count = contactDao.checkDupleID(user);
 		List<User> list = new ArrayList<User>();
-		System.out.println("count="+count);
 		list.add(count>0?user:null);
+		return list; 
+	}
+	
+	@GetMapping("/user")
+    @ResponseBody
+	public List<User> signUp(@RequestParam(value="name", required=false) String name,
+			HttpServletRequest request) throws Exception {
+		User user = new User();
+		user.setName(name);
+		List<User> list = contactDao.getUserList(user);
+		
+		return list; 
+	}
+	
+	@GetMapping("/menu")
+    @ResponseBody
+	public List<Menu> getMenuList(HttpServletRequest request) throws Exception {
+		HttpSession session = request.getSession();
+		User user = new User();
+		user.setId(session.getAttribute("ID").toString());
+		System.out.println("id="+user.getId());
+		List<Menu> list = contactDao.getMenuList(user);
 		return list; 
 	}
 	

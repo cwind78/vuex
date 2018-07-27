@@ -2,22 +2,42 @@
   <div class="layer row">
     <div class="card col-sm-3 col-xs-12">
       <div class="title card-title">
-        <h3>Login</h3>
+        <h3>Sign in</h3>
+        <div>
+          <span>Sign in to your account</span>
+        </div>
       </div>
-      <div class="card-body">
+      <div class="card-body text-left col-xs-12">
         <div>
-          <label>ID</label>
-          <input type="text" name="id" v-model.trim="id" v-validate="'required|alpha_num|min:4'" class="form-control" :class="{ error: errors.has('id') }" />
-          <span class="error">{{ errors.first('id') }}</span>
+          <div class="input-group">
+            <span class="input-group-btn">
+              <button class="btn btn-primary">
+                <font-awesome-icon icon="id-badge"></font-awesome-icon>
+              </button>
+            </span>
+            <input type="text" name="id" v-model.trim="id" v-validate="'required|alpha_num|min:4'" class="form-control" :class="{ error: errors.has('id') }" />
+            <span class="error">{{ errors.first('id') }}</span>
+          </div>
         </div>
-        <div>
-          <label>PASSWORD</label>
-          <input type="text" name="password" v-model.trim="pwd" v-validate="'required|alpha_num|min:4'" class="form-control" :class="{ error: errors.has('password') }" @keyup.enter="auth"/>
-          <span class="error">{{ errors.first('password') }}</span>
+        <div style="margin-top:5px;">
+          <div class="input-group">
+            <span class="input-group-addon">
+              <button class="btn btn-primary">
+                <font-awesome-icon icon="unlock-alt"></font-awesome-icon>
+              </button>
+            </span>
+          <!--label>PASSWORD</label-->
+            <input type="text" name="password" v-model.trim="pwd" v-validate="'required|alpha_num|min:4'" class="form-control" :class="{ error: errors.has('password') }" @keyup.enter="auth"/>
+            <span class="error">{{ errors.first('password') }}</span>
+          </div>
         </div>
-        <div class="text-right" style="margin-top:10px;">
-          <button @click="popSingUp()" class="btn btn-default btn-sm">Sign Up</button>
-          <button class="btn btn-success" :disabled="errors.any()" @click="auth()">Login</button>
+        <div class="col-xs-12" style="margin-top:20px;">
+          <div style="float:left">
+            <button class="btn btn-success" :disabled="errors.any()" @click="auth()">Login</button>
+          </div>
+          <div style="float:right;">
+            <a @click="popSingUp()" class="pull-right">Sign Up</a>
+          </div>
         </div>
       </div>
     </div>
@@ -34,8 +54,8 @@ export default {
   components : { UserInfo },
   data: function( ) {
     return {
-      id: "",
-      pwd: ""
+      id: "1111",
+      pwd: "1111"
   	}
   },
   computed: {
@@ -65,7 +85,7 @@ export default {
 
 <style scoped>
 .title {
-  border-bottom:4px solid blue;
+  /*border-bottom:4px solid blue;*/
 }
 
 .layer{

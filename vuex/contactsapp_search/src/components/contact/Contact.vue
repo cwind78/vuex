@@ -10,7 +10,7 @@ import Search from './Search.vue';
 import ContactList from './ContactList.vue';
 
 export default {
-  name: 'App',
+  name: 'Contact',
   components : {Search, ContactList}
 }
 </script>

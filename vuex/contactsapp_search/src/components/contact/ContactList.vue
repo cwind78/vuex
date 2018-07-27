@@ -34,19 +34,4 @@ export default {
 </script>
 
 <style>
-/*#list {
-  width : 600px;
-  border : 1px solid black;
-  border-collapse : collapse;
-}
-
-#list td, #list th {
-  border : 1px solid black;
-  text-align : center;
-}
-
-#list > thead > tr {
-  color : yellow;
-  background-color : purple;
-}*/
 </style>
