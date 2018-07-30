@@ -12,6 +12,6 @@ public interface ContactDao {
 	public Integer testContactInsert() throws Exception;
 	public Integer signUp(User user) throws Exception;
 	public Integer checkDupleID(User user) throws Exception;
-	public List<Menu> getMenuList(User user) throws Exception;
+	public List<Menu> getMenuList(Menu menu) throws Exception;
 	public List<User> getUserList(User user) throws Exception;
 }

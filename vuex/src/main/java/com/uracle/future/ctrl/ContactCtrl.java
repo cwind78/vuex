@@ -91,12 +91,15 @@ public class ContactCtrl {
 	
 	@GetMapping("/menu")
     @ResponseBody
-	public List<Menu> getMenuList(HttpServletRequest request) throws Exception {
-		HttpSession session = request.getSession();
-		User user = new User();
+	public List<Menu> getMenuList(@RequestParam(value="menu_id", required=false) String menu_id, HttpServletRequest request) throws Exception {
+		//HttpSession session = request.getSession();
+		/*User user = new User();
 		user.setId(session.getAttribute("ID").toString());
 		System.out.println("id="+user.getId());
-		List<Menu> list = contactDao.getMenuList(user);
+		*/
+		Menu menu = new Menu();
+		menu.setMenu_id(menu_id);
+		List<Menu> list = contactDao.getMenuList(menu);
 		return list; 
 	}
 	

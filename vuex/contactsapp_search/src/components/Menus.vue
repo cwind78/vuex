@@ -51,55 +51,9 @@ export default {
   	},
     getMenuList: function() {
       var vm = this
-      axios.get(Constant.BASE_URL + "menu")
+      axios.get(Constant.BASE_URL + "menu", {params: {menu_id:null}})
         .then((response) => {
           vm.menus = response.data
-          var route_name = null;
-          var route_component = null;
-          //var components = [];
-          //var index = 0;
-          for (var i in vm.menus) {
-            if (vm.menus[i].url != null) {
-              route_name = vm.menus[i].url.split("/")[vm.menus[i].url.split("/").length-1]
-              console.log("name="+route_name)
-              //route_component = () => import("./"+vm.menus[i].path)
-              //component = System.import('./' + vm.menus[i].path+".vue")
-              const route_component = resolve => require(['./'+vm.menus[i].path+'.vue'], m => resolve(m.default));
-              vm.$router.addRoutes([{path: vm.menus[i].url, name: route_name, component: route_component}])
-              //vm.$router.addRoutes([{path: vm.menus[i].url, name: route_name, component: route_component}])
-              //vm.$router.options.routes.push({path: vm.menus[i].url, name: route_name, component: () => import('./' + vm.menus[i].path+".vue")})
-              /*Vue.component(route_name, () => {
-                route_component = import('./'+vm.menus[i].path+'.vue')
-                vm.$router.addRoutes([{path: vm.menus[i].url, name: route_name, component: route_component}])
-              })*/
-              //components[index] = () => import('./' + vm.menus[i].path+".vue")
-              //index++
-            }
-          }
-
-          /*index = 0
-          for (var i in vm.menus) {
-            if (vm.menus[i].url != null) {
-              route_name = vm.menus[i].url.split("/")[vm.menus[i].url.split("/").length-1]
-              vm.$router.addRoutes([{path: vm.menus[i].url, name: route_name, component: components[index]}])
-              index++
-            }
-          }*/
-
-          //vm.$router.reload()
-          //m.$forceUpdate()
-          //console.log(JSON.stringify(vm.$router.options.routes))
-
-          /*if (temp.length > 0) {
-            console.log(temp);
-            vm.$router.addRoutes(temp);
-
-            setTimeout(function() {
-              vm.$router.options.routes.forEach(route => {
-                console.log(route.component)
-              })
-            }, 5000)
-          }*/
         })
         .catch(function (error) {
           console.log(error)
@@ -108,7 +62,9 @@ export default {
     goMenu: function(menu) {
       console.log("url="+menu.url)
       if (menu.url != null) {
-        this.$router.push({name: menu.url.split("/")[menu.url.split("/").length-1]});
+        var router_name = menu.url.split("/")[menu.url.split("/").length-1]
+        this.$router.addRoutes([{path: menu.url, name: router_name, component: () => import('./' +menu.path+'.vue')}])
+        this.$router.push({name: router_name});
         this.$store.commit("changeMenu", {isMenu: false})
       }
     },

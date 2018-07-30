@@ -34,9 +34,12 @@
  		select count(*) from user where id = #{id}
  	</select>
  	
- 	<select id="getMenuList" parameterType="com.uracle.future.vo.User" resultType="com.uracle.future.vo.Menu">
+ 	<select id="getMenuList" parameterType="com.uracle.future.vo.Menu" resultType="com.uracle.future.vo.Menu">
  		select menu_id, par_menu_id, deep, sort, menu_group, menu_name, url, use_yn, path from menu
  		where use_yn = 'Y'
+ 		<if test="menu_id != null and menu_id != ''">
+ 			and menu_id = #{menu_id}
+ 		</if>
  		order by menu_group, sort
  	</select>
  	
