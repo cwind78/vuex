@@ -37,7 +37,8 @@ export default {
     }
   },
   created: function() {
-    $('[data-toggle="tooltip"]').tooltip()
+    $('[data-toggle="tooltip"]').tooltip();
+    this.getMenuList();
   },
   computed: {
   	getAuth : function() {

@@ -35,12 +35,22 @@
  	</select>
  	
  	<select id="getMenuList" parameterType="com.uracle.future.vo.Menu" resultType="com.uracle.future.vo.Menu">
- 		select menu_id, par_menu_id, deep, sort, menu_group, menu_name, url, use_yn, path from menu
- 		where use_yn = 'Y'
+ 		SELECT A.ID AS MENU_ID
+			   , A.PARENT AS PAR_MENU_ID
+			   , A.LV AS DEEP
+			   , A.SORT
+			   , A.PARENT AS MENU_GROUP
+			   , A.NAME AS MENU_NAME
+			   , A.URL
+			   , 'Y' AS USE_YN
+			   , A.URL AS PATH
+			FROM MENU A
+			 WHERE USE_YN = 'Y'
+			 
  		<if test="menu_id != null and menu_id != ''">
- 			and menu_id = #{menu_id}
+ 			and ID = #{menu_id}
  		</if>
- 		order by menu_group, sort
+ 		ORDER BY CASE WHEN PARENT =  0 THEN ID ELSE PARENT END, SORT
  	</select>
  	
  	<select id="getUserList" parameterType="com.uracle.future.vo.User" resultType="com.uracle.future.vo.User">
