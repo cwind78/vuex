@@ -4,6 +4,21 @@ public class User {
 	private String id;
 	private String name;
 	private String pwd;
+	private String naverState;
+	private String email;
+	
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public String getNaverState() {
+		return naverState;
+	}
+	public void setNaverState(String naverState) {
+		this.naverState = naverState;
+	}
 	public String getId() {
 		return id;
 	}

@@ -10,7 +10,9 @@ export default {
     user: {},
     users: [],
     isPop: false,
-    isID: false
+    isID: false,
+    naverState: "",
+    codes: []
   },
   getters: {
   },
@@ -29,6 +31,12 @@ export default {
     },
     updateIsID (state, payload) {
       state.isID = payload.isID;
+    },
+    updateNaverState (state, payload) {
+      state.naverState = payload.naverState;
+    },
+    updateCommonCode (state, payload) {
+      state.codes = payload;
     }
   },
   actions : {
@@ -102,6 +110,29 @@ export default {
             Vue.prototype.$noti_warn('Data is not exist')
           } else {
             store.commit("updateUsers", response.data)
+          }
+          store.commit("changeLoading", {isloading: false}, {root: true})
+        })
+        .catch(function (error) {
+          store.commit("changeLoading", {isloading: false}, {root: true})
+          console.log("Please notify me this error : "+error.response)
+        })
+    },
+    getNaverLoginState (store, payload) {
+      axios.get(Constant.BASE_URL + "naver/login", null)
+        .then((response) => {
+          store.commit("updateNaverState", response.data)
+        })
+    },
+    getCommonCodeList (store, payload) {
+      store.commit("changeLoading", {isloading: true}, {root: true})
+      axios.get(Constant.BASE_URL + "common/codeList", {params: {code_group: payload.code_group}})
+        .then((response) => {
+          console.log(response.data);
+          if (response.data[0] == null) {
+            Vue.prototype.$noti_warn('Data is not exist')
+          } else {
+            store.commit("updateCommonCode", response.data)
           }
           store.commit("changeLoading", {isloading: false}, {root: true})
         })

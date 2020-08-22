@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.uracle.future.mapper.CodeDao">
+	<select id="getCodeList" parameterType="com.uracle.future.vo.Code" resultType="com.uracle.future.vo.Code">
+        select code, text, code_group, sort
+          from code
+         where code_group = #{code_group}
+         order by sort
+    </select>
+</mapper>

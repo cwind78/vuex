@@ -4,7 +4,7 @@
       <div class="title card-title">
         <h3>Sign in</h3>
         <div>
-          <span>Sign in to your account</span>
+          <span>Sign in to your account({{state}})</span>
         </div>
       </div>
       <div class="card-body text-left col-xs-12">
@@ -37,6 +37,7 @@
           </div>
           <div style="float:right;">
             <a @click="popSingUp()" class="pull-right">Sign Up</a>
+            <a @click="getNaverloginPage()" class="pull-right">네이버 상태값 가져오기</a>
           </div>
         </div>
       </div>
@@ -58,12 +59,18 @@ export default {
       pwd: "1111"
   	}
   },
+  created: function() {
+    this.getNaverLoginState()
+  },
   computed: {
     getAuth: function() {
       return this.$store.state.auth.auth;
     },
     isPop: function() {
       return this.$store.state.auth.isPop;
+    },
+    state: function() {
+      return this.$store.state.auth.naverState;
     }
   },
   methods: {
@@ -78,6 +85,12 @@ export default {
   	},
     popSingUp : function() {
       this.$store.commit("auth/updateIsPop", {isPop : true})
+    },
+    getNaverLoginState : function() {
+      this.$store.dispatch("auth/getNaverLoginState", null)
+    },
+    getNaverloginPage : function() {
+      window.location = "https://nid.naver.com/oauth2.0/authorize?client_id=lYOZgJlawAuRoPFLy7ln&response_type=code&redirect_uri=http://localhost:8080/naver/login/callback&state="+this.state
     }
   }
 }
