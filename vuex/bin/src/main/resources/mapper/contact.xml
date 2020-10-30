@@ -2,7 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
  
 <mapper namespace="com.uracle.future.mapper.ContactDao">
- 
     <select id="getContact" parameterType="com.uracle.future.vo.Contact" resultType="com.uracle.future.vo.Contact">
         select
         	no, name, tell, address
@@ -14,5 +13,51 @@
         </if>
        
     </select>
- 
+ 	
+ 	<select id="checkLogin" parameterType="com.uracle.future.vo.User" resultType="com.uracle.future.vo.User">
+ 		select * from user where id = #{id} and pwd = #{pwd}
+ 	</select>
+ 	
+ 	<insert id="testUserInsert">
+ 		insert into user (id, name, pwd) values ('1111', 'one', '1111')
+ 	</insert>
+ 	
+ 	<insert id="testContactInsert">
+ 		insert into contact (name, tell, address) values ('one', '010-1111-1122', '서울시 강동구 명일동 롯데캐슬 105동 506호')
+ 	</insert>
+ 	
+ 	<insert id="signUp" parameterType="com.uracle.future.vo.User">
+ 		insert into user (id, pwd, name) values (#{id}, #{pwd}, #{name})
+ 	</insert>
+ 	
+ 	<select id="checkDupleID" parameterType="com.uracle.future.vo.User" resultType="java.lang.Integer">
+ 		select count(*) from user where id = #{id}
+ 	</select>
+ 	
+ 	<select id="getMenuList" parameterType="com.uracle.future.vo.Menu" resultType="com.uracle.future.vo.Menu">
+ 		SELECT A.ID AS MENU_ID
+			   , A.PARENT AS PAR_MENU_ID
+			   , A.LV AS DEEP
+			   , A.SORT
+			   , A.PARENT AS MENU_GROUP
+			   , A.NAME AS MENU_NAME
+			   , A.URL
+			   , 'Y' AS USE_YN
+			   , A.URL AS PATH
+			FROM MENU A
+			 WHERE USE_YN = 'Y'
+			 
+ 		<if test="menu_id != null and menu_id != ''">
+ 			and ID = #{menu_id}
+ 		</if>
+ 		ORDER BY CASE WHEN PARENT =  0 THEN ID ELSE PARENT END, SORT
+ 	</select>
+ 	
+ 	<select id="getUserList" parameterType="com.uracle.future.vo.User" resultType="com.uracle.future.vo.User">
+ 		select id, name, pwd from user
+ 		where 1 = 1
+ 		<if test="name != null and name != ''">
+ 			and name like concat('%',#{name},'%')
+ 		</if>
+ 	</select>
 </mapper>

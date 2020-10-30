@@ -31,6 +31,7 @@ public class AopConfig {
 				if (obj instanceof HttpServletRequest) {
 					req = (HttpServletRequest)obj;
 					session = req.getSession();
+					System.out.println("Name ::::: "+session.getAttribute("NAME"));
 					if (session.getAttribute("NAME") != null && !session.getAttribute("NAME").equals("")) {
 						return jp.proceed();
 					} else {

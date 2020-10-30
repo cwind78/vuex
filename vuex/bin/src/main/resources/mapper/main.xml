@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.uracle.future.mapper.MainMapper">
+    <select id="getIdPntCntById" parameterType="com.uracle.future.vo.User" resultType="int">
+        select count(*)
+		  from id_pnt
+		 where id = #{id}
+
+    </select>
+    
+    <insert id="insertIdPnt" parameterType="com.uracle.future.vo.User">
+    	insert into id_pnt (id, pnt, last_login) values (#{id}, 100, now())
+    </insert>
+    
+    <update id="updateIdPnt" parameterType="com.uracle.future.vo.User">
+    	update id_pnt
+    <![CDATA[
+    	   set pnt = case when DATE_FORMAT(last_login, '%Y-%m-%d') < DATE_FORMAT(now(), '%Y-%m-%d') then
+                          case when pnt+100> 1000 then 1000 else pnt + 100 end
+					 else pnt
+                     end
+    ]]>
+    	       , last_login = now()
+    	 where id = #{id}
+    </update>
+    
+    <update id="updatPnt" parameterType="com.uracle.future.vo.User">
+    	update id_pnt
+    	   set pnt = case when pnt + #{pnt} > 1000 then 1000 else pnt + #{pnt} end
+    	       , last_login = now()
+    	 where id = #{id}
+    </update>
+    
+    <select id="getPntById" parameterType="com.uracle.future.vo.User" resultType="int">
+        select pnt
+		  from id_pnt
+		 where id = #{id}
+
+    </select>
+    
+    <select id="getUserInfoByNaverInfo" parameterType="com.uracle.future.vo.User" resultType="com.uracle.future.vo.User">
+	    SELECT ID
+		  FROM USER
+		 WHERE EMAIL = #{email}
+		   AND NAME = #{name}
+    </select>
+</mapper>

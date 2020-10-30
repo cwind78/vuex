@@ -6,8 +6,15 @@
 		<div class="text-center">
 			<div class="card" v-on:click="getCardBack()">
 				<div class="front"></div>
-				<div class="back">1</div>
+				<div class="back">{{ card_num }}</div>
 			</div>
+      <div>
+        결과가 5이상 나오면 10점(사용시 -1점 차감 하여 총 9점)이 적립 됩니다.
+        반대의 경우 사용시 -1점 차감 됩니다.
+      </div>
+      <div>
+        결과 : <span v-if="card_num>=5">승리</span><span v-if="card_num<5">패배</span>
+      </div>
 			<div>
 				<a class="btn" v-on:click="getCardFront()">다시하기</a>
 			</div>
@@ -15,12 +22,15 @@
 	</div>
 </template>
 <script>
-
+import axios from 'axios'
+import Constant from '../../constant'
 
 export default {
   name: 'App',
   data: function( ) {
     return {
+      card_info: {}
+      , card_num : ""
   	}
   },
   created: function() {
@@ -29,12 +39,30 @@ export default {
   },
   methods: {
     getCardBack: function() {
-    	$(".card").removeClass("backRotate")
-    	$(".card").addClass("cardRotate")
+      //뒤집지 않았다면 뒤집기
+      if (!$(".card").hasClass("cardRotate")) {
+        this.getRandomCardNum()
+    	  $(".card").removeClass("backRotate")
+    	  $(".card").addClass("cardRotate")
+      }
     },
     getCardFront: function() {
     	$(".card").removeClass("cardRotate")
     	$(".card").addClass("backRotate")
+    },
+    getRandomCardNum: function() {
+      axios.get(Constant.BASE_URL + "game/getRandomCardNum/")
+        .then((response) => {
+          if (response.data == {} || response.data == null) {
+            Vue.prototype.$noti_warn('카드 뒤집기 결과를 처리하지 못했습니다')
+          } else {
+            this.card_info = response.data;
+            this.card_num = this.card_info["card_num"]
+          }
+        })
+        .catch(function (error) {
+          alert('카드 뒤집기 결과를 가져오는데 실패 했습니다.');
+        })
     }
   }
 }

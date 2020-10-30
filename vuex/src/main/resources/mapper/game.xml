@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.uracle.future.mapper.GameDao">
+	<select id="getPntById" parameterType="com.uracle.future.vo.User" resultType="com.uracle.future.vo.User">
+		select id
+		       , pnt
+		       , date_format(last_login, '%Y-%m-%d %H:%i') lastLogin
+		  from id_pnt
+		 where id = #{id}
+	</select>
+	
+	<insert id="setPntById" parameterType="com.uracle.future.vo.User">
+        insert into id_pnt (id, pnt, last_login)
+        values (#{id}, #{pnt}+100, now());
+    </insert>
+    
+    <update id="updPntById" parameterType="com.uracle.future.vo.User">
+        update id_pnt
+           set pnt = pnt + #{pnt}
+         where id = #{id}
+    </update>
+</mapper>

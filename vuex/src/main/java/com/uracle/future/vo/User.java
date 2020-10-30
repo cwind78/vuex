@@ -6,6 +6,8 @@ public class User {
 	private String pwd;
 	private String naverState;
 	private String email;
+	private Integer pnt;
+	private String lastLogin;
 	
 	public String getEmail() {
 		return email;
@@ -36,5 +38,17 @@ public class User {
 	}
 	public void setPwd(String pwd) {
 		this.pwd = pwd;
+	}
+	public Integer getPnt() {
+		return pnt;
+	}
+	public void setPnt(Integer pnt) {
+		this.pnt = pnt;
+	}
+	public String getLastLogin() {
+		return lastLogin;
+	}
+	public void setLastLogin(String lastLogin) {
+		this.lastLogin = lastLogin;
 	}
 }
