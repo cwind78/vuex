@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.uracle.future.mapper.TestDao">
+	<update id="updUserLastLogin" parameterType="com.uracle.future.vo.User">
+		update user
+		   set last_login = now()
+		 where id = #{id}
+	</update>
+	
+	<update id="updIdPnt" parameterType="com.uracle.future.vo.User">
+        update id_pnt 
+           set pnt = pnt + #{pnt}
+         where id = #{id}
+    </update>
+</mapper>
